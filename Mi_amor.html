@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROSER 🖤</title>
+  <link rel="icon" href="./favicon_io/carta.png" type="image/png"> <!-- Favicon agregado -->
+  <style>
+    /* Reset y estilos base */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to bottom, #e2ebf0, #cfd9df);
+      font-family: 'Playfair Display', serif;
+      overflow: hidden;
+    }
+    
+    /* Corazones flotantes en el fondo */
+    .floating-heart {
+      position: absolute;
+      font-size: 30px;
+      color: black;
+      animation: float 6s infinite ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      50% { transform: translateY(-200px) scale(1.2); opacity: 0.7; }
+      100% { transform: translateY(-400px) scale(1.5); opacity: 0; }
+    }
+    
+    /* Botón trigger para abrir la carta, centrado */
+    .card-trigger {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 32px;
+      color: #2c3e50;
+      cursor: pointer;
+      padding: 20px 40px;
+      border: 2px solid #2c3e50;
+      border-radius: 50px;
+      transition: transform 0.3s, background 0.3s;
+      z-index: 10;
+    }
+    .card-trigger:hover {
+      background: #2c3e50;
+      color: white;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+    
+    /* Contenedor que agrupa la carta y el botón de cerrar */
+    .card-wrapper {
+      text-align: center;
+      z-index: 5;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Contenedor de la carta */
+    .card-container {
+      width: 100%;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: row;  /* Asegura que el texto y las fotos estén al lado */
+      padding: 30px;
+      transform: scale(0.7);
+      opacity: 0;
+      transition: transform 0.8s ease, opacity 0.8s ease;
+      margin: 0 auto;
+    }
+    .card-container.show {
+      transform: scale(1);
+      opacity: 1;
+    }
+    
+    /* Ajuste del título */
+    .card-left h1 {
+      font-size: 48px;
+      font-family: 'Dancing Script', cursive;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      text-align: center; /* Centramos el título */
+      letter-spacing: 2px;
+      width: 100%;
+    }
+
+    /* Ajustar el texto */
+    .card-left p {
+      font-size: 22px;
+      color: #555;
+      line-height: 1.8;
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    /* Ajuste de la sección de las fotos */
+    .card-right {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-left: 20px;
+      align-items: center; /* Centrado horizontal */
+      justify-content: center; /* Centrado vertical */
+      height: 100%;
+    }
+
+    /* Ajuste de las imágenes dentro del flexbox */
+    .slideshow-frame img {
+      max-width: 500px; /* Aumentamos el tamaño máximo */
+      height: auto; /* Mantener la proporción */
+      border: 5px solid #2c3e50;  /* Marco alrededor de las imágenes */
+      border-radius: 10px;
+      display: none; /* Inicialmente no se muestran las imágenes */
+      transition: opacity 1s ease;
+    }
+
+    /* Botón de cerrar, centrado debajo de la carta */
+    .close-btn {
+      background: #2c3e50;
+      color: white;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+      transition: background 0.3s ease, transform 0.3s ease;
+      margin: 20px auto;
+      display: block;
+      z-index: 10;
+    }
+    .close-btn:hover {
+      background: #1a252f;
+      transform: translateY(-5px);
+    }
+    
+    /* Ocultar el reproductor de música */
+    #music { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Script para crear corazones flotantes -->
+  <script>
+    function createFloatingHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("floating-heart");
+      heart.textContent = "🖤";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }
+    setInterval(createFloatingHeart, 500);
+  </script>
+  
+  <!-- Trigger para abrir la carta -->
+  <div class="card-trigger" onclick="openCard()">Abrir la Carta 🖤</div>
+  
+  <!-- Contenedor que agrupa la carta y el botón de cerrar -->
+  <div class="card-wrapper">
+    <!-- Contenedor de la carta -->
+    <div class="card-container" id="card">
+      <div class="card-left">
+        <h1>PARA MI AMOR, FELIZ SAN VALENTIN 🖤</h1>
+        <p>
+          Desde el dia que te conoci en Ollerias no me imginaba a todo lo que llegariamos. Aun a dia de hoy descubro en ti detalles que me hacen enamorarme aún más. Quiero seguir explorando el mundo contigo, hacer viajes inolvidables y crear nuevos recuerdos que nos acompañen por siempre. Estoy feliz de estar contigo porque a parte de todo el cariño que me das me ayudas a sacar siempre mi mejor version. Me emociona la idea de tener un futuro juntos y de corazon te digo que no veo mi vida sin ti. Eres lo mejor que tengo en mi vida y ojala celebrar muchos más San valetines juntos. Te amo con todo mi corazon.
+        </p>
+      </div>
+      <div class="card-right">
+        <div class="slideshow-frame" id="slideshow">
+          <img src="foto1.jpg" alt="Foto 1">
+          <img src="foto2.jpg" alt="Foto 2">
+          <img src="foto3.jpg" alt="Foto 3">
+          <img src="foto4.jpg" alt="Foto 4">
+          <img src="foto5.jpg" alt="Foto 5">
+          <img src="foto6.jpg" alt="Foto 6">
+          <img src="foto7.jpg" alt="Foto 7">
+          <img src="foto8.JPG" alt="Foto 8">
+          <img src="foto9.jpg" alt="Foto 9">
+          <img src="foto10.jpg" alt="Foto 10">
+          <img src="foto11.jpg" alt="Foto 11">
+          <img src="foto12.jpg" alt="Foto 12">
+          <img src="foto13.jpg" alt="Foto 13">
+          <img src="foto14.jpg" alt="Foto 14">
+          <img src="foto15.jpg" alt="Foto 15">
+          <img src="foto16.jpg" alt="Foto 16">
+          <img src="foto17.jpg" alt="Foto 17">
+          <img src="foto18.jpg" alt="Foto 18">
+        </div>
+      </div>
+    </div>
+    <!-- Botón para cerrar la carta -->
+    <button class="close-btn" id="closeBtn" onclick="closeCard()" style="display: none;">❌ Cerrar Carta</button>
+  </div>
+  
+  <!-- Música de fondo -->
+  <audio id="music" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+  </audio>
+  
+  <script>
+    let isMusicPlaying = false;
+    let slideshowInterval;
+    let currentSlide = 0;
+    const slides = document.querySelectorAll(".slideshow-frame img");
+  
+    function openCard() {
+      // Ocultar el trigger
+      document.querySelector(".card-trigger").style.display = "none";
+      // Mostrar la carta
+      const card = document.getElementById("card");
+      card.classList.add("show");
+      // Mostrar el botón de cerrar
+      document.getElementById("closeBtn").style.display = "block";
+  
+      // Reproducir la música
+      const music = document.getElementById("music");
+      if (!isMusicPlaying) {
+        music.play().then(() => { isMusicPlaying = true; })
+          .catch(() => { console.log("Autoplay bloqueado."); });
+      }
+  
+      // Iniciar el slideshow: cambia la imagen cada 3 segundos
+      slideshowInterval = setInterval(() => {
+        // Ocultar la imagen actual
+        slides[currentSlide].style.display = "none";
+        // Avanzar a la siguiente imagen
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].style.display = "block"; // Mostrar la siguiente imagen
+      }, 3000);
+  
+      // Mostrar la primera foto
+      slides[currentSlide].style.display = "block";
+    }
+  
+    function closeCard() {
+      const card = document.getElementById("card");
+      card.classList.remove("show");
+      // Ocultar el botón de cerrar y mostrar el trigger
+      document.getElementById("closeBtn").style.display = "none";
+      document.querySelector(".card-trigger").style.display = "block";
+  
+      // Detener la música
+      const music = document.getElementById("music");
+      music.pause();
+      music.currentTime = 0;
+      isMusicPlaying = false;
+  
+      // Detener el slideshow y reiniciar a la primera imagen
+      clearInterval(slideshowInterval);
+      slides[currentSlide].style.display = "none";
+      currentSlide = 0;
+      slides[currentSlide].style.display = "none";
+    }
+  </script>
+</body>
+</html>
