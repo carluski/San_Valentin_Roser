@@ -1,0 +1,31 @@
+{
+  "modelo": "claude-sonnet-5-5",
+  "palabras_objetivo": 4200,
+  "max_solape_pct": 3.0,
+  "max_nombres_repetidos": 2,
+  "reddit": {
+    "subreddits": {
+      "nosleep": "misterio",
+      "relationship_advice": "romance",
+      "TrueOffMyChest": "romance"
+    },
+    "periodo": "week",
+    "limite": 25,
+    "min_palabras": 250,
+    "permitir_nsfw": false
+  },
+  "voz": {
+    "misterio": "es-ES-AlvaroNeural",
+    "romance": "es-ES-ElviraNeural",
+    "velocidad": "-5%"
+  },
+  "video": {
+    "banner_segundos": 0,
+    "musica": "",
+    "volumen_musica": 0.08,
+    "fuente": "",
+    "crf": 21,
+    "preset": "medium"
+  },
+  "registro": "registro.xlsx"
+}
