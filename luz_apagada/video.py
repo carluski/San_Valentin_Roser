@@ -91,7 +91,7 @@ def construir_fondo(clips, duracion, ancho, alto, carpeta):
         ini = random.uniform(0, max(0, durs[clip] - seg))
         out = carpeta / f"_trozo_{len(trozos):03d}.mp4"
         ffmpeg("-ss", f"{ini:.2f}", "-t", f"{seg:.2f}", "-i", clip, "-an", "-vf", vf,
-               "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", out)
+               "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", out)  # intermedio: calidad media para no llenar el disco
         trozos.append(out)
         total += base.duracion(out)
         anterior = clip
