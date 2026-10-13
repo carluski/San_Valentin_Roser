@@ -1,0 +1,8 @@
+.env
+ideas/
+historias/
+salida/
+fondos/
+registro.xlsx
+registro.csv
+__pycache__/
